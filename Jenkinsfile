@@ -54,6 +54,14 @@ pipeline {
                 }
             }
         }
+        stage('Functional Tests') {
+            steps {
+                dir('functional-tests') {
+                    git 'https://github.com/carolinasq7/tasks-functional-test.git'
+                    sh 'mvn test'
+                }
+            }
+        }
     }
 }
 
