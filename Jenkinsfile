@@ -45,7 +45,18 @@ pipeline {
                 }
             }
         }
+        stage('Deploy Frontend') {
+            steps {
+                dir('tasks-frontend') {
+                    git 'https://github.com/carolinasq7/tasks-frontend.git'
+                    sh 'mvn clean package'
+                    deploy adapters: [tomcat9(credentialsId: 'TomcatLogin', path: '', url: 'http://localhost:8001/')], contextPath: 'tasks', war: 'target/tasks.war'
+                }
+            }
+        }
     }
 }
+
+
 
 
