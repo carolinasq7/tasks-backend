@@ -63,6 +63,9 @@ pipeline {
             }
         }
         stage('Deploy Prod') {
+            environment {
+                PATH = "/usr/local/bin:$PATH"
+            }
             steps {
                 sh 'docker-compose --version'
                 sh 'docker-compose build'
@@ -71,7 +74,3 @@ pipeline {
         }
     }
 }
-
-
-
-
